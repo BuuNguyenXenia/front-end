@@ -25,7 +25,6 @@ const Header = () => {
 
   const user = useAppSelector(userSelector)
   const { email, name, isSuccess, role, avatar } = user
-  console.log(user)
 
   const handleScroll = () => {
     if (document.documentElement.scrollTop > 80) {
@@ -116,15 +115,26 @@ const Header = () => {
                         </Dropdown.Item>
                       </>
                     ) : (
-                      <Dropdown.Item as="p" className="link link-plain">
-                        <Link
-                          to="/admin/manage-posts"
-                          className="link link-plain"
-                        >
-                          <i className="fas fa-tasks"></i>
-                          Posts Management
+                      <>
+                        <Link to={PATH.USER_PROFILE}>
+                          <Dropdown.Item as="span" className="link link-plain">
+                            <i className="fa fa-user"></i>
+                            Profile
+                          </Dropdown.Item>
                         </Link>
-                      </Dropdown.Item>
+                        <Link to={PATH.USER_SETTINGS}>
+                          <Dropdown.Item as="span" className="link link-plain">
+                            <i className="fas fa-cog"></i>
+                            Settings
+                          </Dropdown.Item>
+                        </Link>
+                        <Link to="/admin/manage-posts">
+                          <Dropdown.Item as="span" className="link link-plain">
+                            <i className="fas fa-tasks"></i>
+                            Posts Management
+                          </Dropdown.Item>
+                        </Link>
+                      </>
                     )}
                     <Dropdown.Divider />
                     <Dropdown.Item

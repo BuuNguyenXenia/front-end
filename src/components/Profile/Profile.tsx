@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react"
-import { Button, Col, Form, Row } from "react-bootstrap"
+import { Button, Col, Form, Modal, Row } from "react-bootstrap"
 import toast, { Toaster } from "react-hot-toast"
 import { ProfileStyle } from "./Profile.styled"
 import { useAppDispatch, useAppSelector } from "src/store/hooks"
-import { updateUserName, userSelector } from "src/pages/User/User.slice"
+import {
+  updateAvatarUser,
+  updateUserName,
+  userSelector
+} from "src/pages/User/User.slice"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup"
+import userApi from "src/apis/user.api"
+import { MSG } from "src/constants/showMsg"
+import avatarDefault from "src/assets/images/avatar.png"
 
 const Profile = () => {
   const user = useAppSelector(userSelector)
@@ -52,6 +59,59 @@ const Profile = () => {
     resolver: yupResolver(schema)
   })
 
+  //----------------------------------------------
+
+  const [profileImg, setProfileImg] = useState<string>(avatarDefault)
+  const [image, setImage] = useState<any>(null)
+
+  const imageHandler = e => {
+    setImage(e.target.files[0])
+
+    const reader: any = new FileReader()
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setProfileImg(reader.result)
+      }
+    }
+    reader.readAsDataURL(e.target.files[0])
+  }
+
+  const [show, setShow] = useState(false)
+
+  const handleClose = () => {
+    setShow(false)
+  }
+  const handleShow = () => setShow(true)
+
+  const imageUploadToImgur = async (image: any) => {
+    try {
+      const formData = new FormData()
+
+      formData.append("file", image)
+      formData.append("tags", `codeinfuse, medium, gist`)
+      formData.append("upload_preset", "rhy123")
+      formData.append("api_key", "954397545867351")
+
+      const response = await userApi.uploadAvatar(formData)
+      const data = await response.data
+
+      if (response.status === 200) {
+        const params = {
+          name: name,
+          avatar: data.secure_url
+        }
+        dispatch(updateAvatarUser(params))
+        toast.success(MSG.UPDATE_AVATAR_SUCCESS)
+        setProfileImg(avatarDefault)
+        setShow(false)
+      }
+    } catch (err) {
+      toast.error(err.response.data)
+    }
+  }
+
+  //-------------------------------------------------
+
   return (
     <ProfileStyle>
       <Row>
@@ -62,6 +122,9 @@ const Profile = () => {
       <Row className="profile-user">
         <Col md={2} sm={12} className="profile-avatar">
           <img src={avatar} alt="avatar" />
+          <div className="change-avatar" onClick={handleShow}>
+            <i className="fas fa-camera-retro"></i>
+          </div>
         </Col>
         <Col md={5} sm={12} className="profile-body">
           <p className="profile-gmail">{email}</p>
@@ -76,7 +139,58 @@ const Profile = () => {
           </Button>
         </Col>
       </Row>
+
+      <Modal
+        size="lg"
+        show={show}
+        onHide={handleClose}
+        aria-labelledby="example-modal-sizes-title-xs"
+        className="model"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+            Change Profile Picture
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Row>
+            <Col xs={12}>
+              <div className="page">
+                <div className="img-holder">
+                  <img src={profileImg} alt="" id="img" className="img" />
+                </div>
+
+                <input
+                  type="file"
+                  name="image-upload"
+                  id="input"
+                  onChange={imageHandler}
+                />
+                <p className="text-center mt-1">
+                  <small>
+                    Tips: Use scroll wheel to zoom, drag to move profile
+                    picture.
+                  </small>
+                </p>
+                <label className="button-upload" htmlFor="input">
+                  <Button as="span" variant="outline-info">
+                    <i className="fas fa-upload"></i>
+                  </Button>
+                </label>
+              </div>
+            </Col>
+          </Row>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => imageUploadToImgur(image)}>Save</Button>
+        </Modal.Footer>
+      </Modal>
       <Row className={checkEditUSer ? "m-0 mt-5 active" : "m-0 form-user"}>
+        <Row>
+          <Col xs={2}>
+            <img src="" alt="" />
+          </Col>
+        </Row>
         <Form onSubmit={handleSubmit(() => HandleUserName(name, userName))}>
           <Row>
             <Col xs={12}>
