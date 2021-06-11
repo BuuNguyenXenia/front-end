@@ -1,6 +1,6 @@
 export const MSG = {
   REGISTER_ERROR: "The Email was registered",
-  NOT_LOGIN_ERROR: "Please login to be able to comment",
+  NOT_LOGIN_ERROR: "Please login to be able to comment and like",
   EMAIL_ERROR: "The email and name was registered",
   CHANGE_PASSWORD_SUCCESS: "Change password successfully",
   FORGOT_PASSWORD_SUCCESS: "Successful, please come back to login",

@@ -26,4 +26,7 @@ export const EditPostPage = styled.div`
   .quill {
     background-color: white;
   }
+  .form-control-file {
+    color: var(--widget-title-color);
+  }
 `

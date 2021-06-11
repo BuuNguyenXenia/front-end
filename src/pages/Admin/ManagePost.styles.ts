@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const ManagePostPage = styled.div`
+  min-height: 100vh;
   margin-top: 100px;
   .active {
     transition-duration: 0.8s;

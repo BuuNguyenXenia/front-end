@@ -8,7 +8,6 @@ import { dataMyPost } from "../MyPost.slice"
 import { useAppDispatch } from "src/store/hooks"
 import { Link } from "react-router-dom"
 import { PATH } from "src/constants/path"
-import LocalStorageService from "src/services/LocalStorageService/Storage.service"
 import { itemPostThunk } from "src/components/ViewAllPosts/Posts.slice"
 
 const PostItem = ({ title, image, createdAt, body, postId }) => {
@@ -41,16 +40,10 @@ const PostItem = ({ title, image, createdAt, body, postId }) => {
       <Col xs={12} className="p-0">
         <Card className="card-lastsNews-item">
           <Row className="lastsNews-item">
-            <Col
-              xl={3}
-              lg={3}
-              md={3}
-              sm={3}
-              className=" card-lastsNews-image px-2"
-            >
+            <Col lg={3} md={4} sm={5} className=" card-lastsNews-image px-2">
               <Card.Img src={image} />
             </Col>
-            <Col xl={9} lg={9} md={9} sm={9} className="p-0">
+            <Col lg={9} md={8} sm={7} className="p-0">
               <Card.Body className="card-lastsNews-body">
                 <Card.Title className="card-lastsNews-title mb-1">
                   {title}

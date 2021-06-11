@@ -94,11 +94,6 @@ export const AddPost = () => {
         <Form.Group className="mt-3">
           <Row>
             <Col xs={10}>
-              <Link to={PATH.MANAGE_POST} className="mr-3">
-                <Button variant="info" type="button">
-                  Cancel
-                </Button>
-              </Link>
               <Button
                 variant="primary"
                 type="button"

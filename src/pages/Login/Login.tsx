@@ -68,7 +68,7 @@ const Login = () => {
                       <img src={Logo} alt="Blogs Technology" />
                     </div>
                     <div className="text-center mb-3">
-                      <h5> Login to Blogs</h5>
+                      <h5 className="card-title"> Login to Blogs</h5>
                     </div>
                     <Form onSubmit={handleSubmit}>
                       <Form.Row>

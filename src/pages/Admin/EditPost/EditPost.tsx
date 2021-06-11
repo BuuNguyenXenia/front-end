@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { Button, Col, Form, Row } from "react-bootstrap"
-import toast, { Toaster } from "react-hot-toast"
 import { EditPostPage } from "./EditPost.styles"
 import { Link, useParams } from "react-router-dom"
 import { PATH } from "src/constants/path"

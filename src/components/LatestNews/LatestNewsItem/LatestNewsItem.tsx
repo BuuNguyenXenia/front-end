@@ -22,7 +22,7 @@ export default function LatestNewsItem({
   const [urlPost] = useState<string>(urlPostItem(title))
   const dispatch = useAppDispatch()
 
-  const content = handleShowContent(body, 150)
+  const content = handleShowContent(body, 100)
   const creatDate = formatDate(createdAt)
 
   const handleItemPost = (postId: string) => {

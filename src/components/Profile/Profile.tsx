@@ -215,7 +215,7 @@ const Profile = () => {
             </Col>
           </Row>
           <Row>
-            <Col xs={3} md={2}>
+            <Col xs={4} md={3}>
               <Button
                 variant="primary"
                 className="mt-3 mb-4"

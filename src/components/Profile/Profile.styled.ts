@@ -68,4 +68,27 @@ export const ProfileStyle = styled.div`
   .form-label {
     color: var(--meta-color);
   }
+
+  @media (max-width: 576px) {
+    //profile
+    img.avatar {
+      width: 60px;
+      height: 60px;
+    }
+
+    .change-avatar {
+      position: absolute;
+      right: 13px;
+      bottom: 0px;
+      background-color: white;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .profile-body {
+      font-size: 1em;
+    }
+  }
 `
