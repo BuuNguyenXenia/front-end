@@ -1,6 +1,7 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap");
 @import "semantic-ui-css/semantic.min.css";
+@import 'react-quill/dist/quill.snow.css';
 
 :root {
   --date-color: rgba(0, 0, 0, 0.4);
@@ -47,10 +48,6 @@
   --url: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACAklEQVRIia2UsUuVYRjFz3ORhmgQuQnJHRykoT/AGkQkQpoKGoIgmsWhIaLdob+hKRpCDKKpoQgkQiLEGiJEzHQoKhIiHMTses+voefCR93r95n3mZ7hec95z3nP+4QKBdQknZF0RdIYUJf0S9L7iHgi6UFEbOp/CugH7gE7dK9Pti/lRQ4M/tx2G2gFmLF9DZi2PQtsA9jeAaYOAl4DZm23D98CjnSYGwFe5tw2MF6VYKJgy8395AP1VAewUMmq9B3bb4G+CvMXgGbaeapsvgaMZT8XEXulN5KeSfqY/UQpQUTUJSkiPlQAV0T8lLQZEQJOlBJIat/6n4ftVm3vI8KlBMBG9qcrgg9GxDAgSWtVDtzOVHyzXa8wfwNoAbu2h6oQjAA/kuQRcHSf2VHbW5m6+6XghYPTtlv5iV4Ao8WMAwPAddtbGc9d4OxBCPpsz9huppJt4B3wGJgHvqYtbXCAddtXgXO2u6ouksj2ZWC1y6JrAnPAeeBz2gTQsj0P9HfCjU5q9GdVj0fEcUl7wFpEPI2IjZyZAu5IUv4HSXodERcj4ktl6/ZRO9lJou1XthuHJrB9DFgsrHcK/RIw0AsVQ+RmzfRR6JeA8j9SQclJYLlLKBaAwV4oGQFWuth199AESdKwvdzBru89IUiSYdtv/krVas8IkqQBPMyVsg5M/gZ2Ts98TFMNugAAAABJRU5ErkJggg==");
 }
 
-img {
-  object-fit: cover;
-}
-
 body {
   margin: 0;
   font-size: 16px;
@@ -60,6 +57,10 @@ body {
     "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  object-fit: cover;
 }
 
 @media (max-width: 1200px) {
@@ -74,6 +75,7 @@ body {
       }
     }
   }
+
 }
 
 @media (max-width: 992px) {

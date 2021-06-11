@@ -10,7 +10,12 @@ interface ItemPost {
   _id: string
 }
 
-// interface Comment {
-//   _id: string
-//   body: string
+// interface newPost {
+//   title: string,
+//   body: string,
+//   image: string
 // }
+
+interface RouteParams {
+  postId: string
+}

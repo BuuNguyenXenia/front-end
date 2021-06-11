@@ -11,7 +11,7 @@ import LocalStorageService from "src/services/LocalStorageService/Storage.servic
 import { useAppDispatch } from "src/store/hooks"
 import { PostsItem } from "./PopularPostsItem.styles"
 
-export default function PopularPostsItem({ title, createdAt, postId }) {
+export default function PopularPostsItem({ title, createdAt, postId, image }) {
   const [urlPost] = useState<string>(urlPostItem(title))
   const dispatch = useAppDispatch()
 
@@ -28,19 +28,19 @@ export default function PopularPostsItem({ title, createdAt, postId }) {
         <Row>
           <Col xs={4} className="p-0">
             <Link
-              to={urlPost}
+              to={`${urlPost}/${postId}`}
               className="posts-item-image wrapper-image"
               onClick={() => handleItemPost(postId)}
             >
-              <img
-                src="https://1.bp.blogspot.com/-k_4VhcdaHds/XyMrIZP2mWI/AAAAAAAACb0/43LgXMLoZPEiVqOL1SUWKJMUIU3t0pd5QCLcBGAsYHQ/s1600/ify10.jpg"
-                alt="img"
-              />
+              <img src={image} alt="img" />
             </Link>
           </Col>
           <Col xs={8} className="posts-item-body">
             <h5 className="posts-item-title wrapper-title">
-              <Link to={urlPost} onClick={() => handleItemPost(postId)}>
+              <Link
+                to={`${urlPost}/${postId}`}
+                onClick={() => handleItemPost(postId)}
+              >
                 {title}
               </Link>
             </h5>

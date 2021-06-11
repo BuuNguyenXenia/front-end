@@ -120,17 +120,17 @@ const Profile = () => {
         </Col>
       </Row>
       <Row className="profile-user">
-        <Col md={2} sm={12} className="profile-avatar">
-          <img src={avatar} alt="avatar" />
+        <Col md={2} xs={3} className="profile-avatar">
+          <img src={avatar} alt="avatar" className="avatar" />
           <div className="change-avatar" onClick={handleShow}>
             <i className="fas fa-camera-retro"></i>
           </div>
         </Col>
-        <Col md={5} sm={12} className="profile-body">
+        <Col md={7} xs={6} className="profile-body ">
           <p className="profile-gmail">{email}</p>
           <p className="profile-name">@{name}</p>
         </Col>
-        <Col md={5} sm={12}>
+        <Col md={3} xs={2} className="p-0">
           <Button
             variant="outline-primary mt-3"
             onClick={() => HandleShowUser()}
@@ -186,11 +186,6 @@ const Profile = () => {
         </Modal.Footer>
       </Modal>
       <Row className={checkEditUSer ? "m-0 mt-5 active" : "m-0 form-user"}>
-        <Row>
-          <Col xs={2}>
-            <img src="" alt="" />
-          </Col>
-        </Row>
         <Form onSubmit={handleSubmit(() => HandleUserName(name, userName))}>
           <Row>
             <Col xs={12}>
@@ -198,18 +193,18 @@ const Profile = () => {
             </Col>
           </Row>
           <Row>
-            <Col xs={2}>
+            <Col xs={3}>
               <Form.Label>Email:</Form.Label>
             </Col>
-            <Col xs={7}>
+            <Col xs={9} md={7}>
               <Form.Control type="email" value={email} disabled />
             </Col>
           </Row>
           <Row className="mt-4">
-            <Col xs={2}>
+            <Col xs={3}>
               <Form.Label>User Name:</Form.Label>
             </Col>
-            <Col xs={7}>
+            <Col xs={9} md={7}>
               <Form.Control
                 type="text"
                 value={userName}
@@ -220,8 +215,13 @@ const Profile = () => {
             </Col>
           </Row>
           <Row>
-            <Col xs={2}>
-              <Button variant="primary" className="mt-4" type="submit" block>
+            <Col xs={3} md={2}>
+              <Button
+                variant="primary"
+                className="mt-3 mb-4"
+                type="submit"
+                block
+              >
                 Update
               </Button>
             </Col>

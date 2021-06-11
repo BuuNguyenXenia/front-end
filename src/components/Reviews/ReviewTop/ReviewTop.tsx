@@ -11,7 +11,7 @@ import LocalStorageService from "src/services/LocalStorageService/Storage.servic
 import { useAppDispatch } from "src/store/hooks"
 import { TopReview } from "./ReviewTop.styled"
 
-export default function ReviewTop({ title, createdAt, postId }) {
+export default function ReviewTop({ title, createdAt, postId, image }) {
   const [urlPost] = useState<string>(urlPostItem(title))
   const dispatch = useAppDispatch()
 
@@ -25,15 +25,18 @@ export default function ReviewTop({ title, createdAt, postId }) {
   return (
     <TopReview>
       <Card className="card-review-top">
-        <Link to={urlPost} onClick={() => handleItemPost(postId)}>
-          <Card.Img
-            src="https://1.bp.blogspot.com/-RC31VhRLxHA/XyMqQ0J1h6I/AAAAAAAACbQ/Qu7h6jbaj7gXYxJFSx7ImUIxWMf_HVVFACLcBGAsYHQ/w387-h226-p-k-no-nu/ify7.jpg"
-            className="card-review-image"
-          />
+        <Link
+          to={`${urlPost}/${postId}`}
+          onClick={() => handleItemPost(postId)}
+        >
+          <Card.Img src={image} className="card-review-image" />
         </Link>
         <Card.Body className="card-review-body">
           <Card.Title className="card-review-title">
-            <Link to={urlPost} onClick={() => handleItemPost(postId)}>
+            <Link
+              to={`${urlPost}/${postId}`}
+              onClick={() => handleItemPost(postId)}
+            >
               {title}
             </Link>
           </Card.Title>

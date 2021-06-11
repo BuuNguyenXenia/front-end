@@ -14,11 +14,16 @@ import HomePage from "src/pages/HomePage/HomePage"
 import { LayoutRoute } from "./LayoutRoute"
 import NotFoundPage from "src/pages/NotFoundPage/NotFoundPage"
 import PrivateRoute from "./NavigationRoute/PrivateRoute"
+import Header from "src/components/Header/Header"
+import ScrollToTop from "src/components/ScrollToTop/ScrollToTop"
+import Footer from "src/components/Footer/Footer"
+import ManagePost from "src/pages/Admin/ManagePost"
 
 export default function HomePageRoutes() {
   const { isSuccess, dataPost } = useAppSelector(itemPostSelector)
   const url = LocalStorageService.getItem<string>("urlPost")
   var PATH_URL = "/"
+
   if (url) {
     PATH_URL = urlPostItem(url)
   }
@@ -40,9 +45,19 @@ export default function HomePageRoutes() {
       <LayoutRoute path={PATH.SEARCH_POST} component={<SearchPage />} />
       <PrivateRoute path={PATH.USER_PROFILE} component={<Profile />} />
       <PrivateRoute path={PATH.USER_SETTINGS} component={<Settings />} />
-      <LayoutRoute path={urlPost} component={<ViewPostsItem />} />
+      <LayoutRoute
+        path={`${urlPost}/:postId`}
+        component={<ViewPostsItem />}
+        exact
+      />
       <Route exact path={PATH.NOT_FOUND}>
         <NotFoundPage />
+      </Route>
+      <Route path={PATH.MANAGE_POST}>
+        <Header />
+        <ScrollToTop />
+        <ManagePost />
+        <Footer />
       </Route>
     </Switch>
   )
