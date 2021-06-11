@@ -65,4 +65,7 @@ export const ProfileStyle = styled.div`
       align-items: center;
     }
   }
+  .form-label {
+    color: var(--meta-color);
+  }
 `

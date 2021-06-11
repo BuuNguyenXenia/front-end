@@ -36,6 +36,7 @@ const Header = () => {
 
   const nightMode = () => {
     setToggle(!toogle)
+    LocalStorageService.setItem("check", !toogle)
   }
 
   const LogOutUser = () => {
@@ -44,19 +45,19 @@ const Header = () => {
 
     history.push(PATH.HOME)
   }
-
+  let checkToggle: any = LocalStorageService.getItem("check")
   useEffect(() => {
-    toogle
+    checkToggle
       ? document.body.classList.add("dark")
       : document.body.classList.remove("dark")
-  }, [toogle])
+  }, [checkToggle])
 
   useEffect(() => {
     window.onscroll = () => handleScroll()
   }, [scrollHeader])
 
   useEffect(() => {
-    // console.log(isSuccess)
+    console.log(isSuccess)
 
     setToken(accessToken)
     if (token) {
@@ -77,7 +78,7 @@ const Header = () => {
             <div className="main-navbar">
               <ThemeSwitch>
                 <span
-                  className={toogle ? "themeSwitch active" : "themeSwitch"}
+                  className={checkToggle ? "themeSwitch active" : "themeSwitch"}
                   onClick={nightMode}
                 ></span>
               </ThemeSwitch>

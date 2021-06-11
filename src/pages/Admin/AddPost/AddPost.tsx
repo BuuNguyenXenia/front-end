@@ -6,7 +6,6 @@ import Editor from "../Editor/Editor"
 import userApi from "src/apis/user.api"
 import { useAppDispatch } from "src/store/hooks"
 import { createNewPost } from "src/components/ViewAllPosts/Posts.slice"
-import { Toaster } from "react-hot-toast"
 import { Link } from "react-router-dom"
 import { PATH } from "src/constants/path"
 
