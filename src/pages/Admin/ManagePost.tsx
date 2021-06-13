@@ -16,11 +16,13 @@ const ManagePost = () => {
   const dispatch = useAppDispatch()
   const user = useAppSelector(userSelector)
   const dataPost = useAppSelector(myPostSelector)
+  console.log(dataPost)
+
   useEffect(() => {
     if (user.role === "admin") {
-      dispatch(dataMyPost())
+      dispatch(dataMyPost(1))
     }
-  }, [user.role, dataPost])
+  }, [user.role])
 
   return (
     dataPost && (

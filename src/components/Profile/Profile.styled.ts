@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const ProfileStyle = styled.div`
+  margin-bottom: 50px;
   .profile-title {
     font-size: 1.1em;
     font-weight: 500;

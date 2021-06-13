@@ -76,6 +76,9 @@ export const PostItemPage = styled.div`
     right: 20px;
     top: 10px;
   }
+  #dropdown-icon {
+    cursor: pointer;
+  }
   .dropdown-toggle {
     ::after {
       content: "";

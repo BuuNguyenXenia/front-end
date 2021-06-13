@@ -6,18 +6,20 @@ import { PATH } from "src/constants/path"
 import userApi from "src/apis/user.api"
 import { useAppDispatch, useAppSelector } from "src/store/hooks"
 import {
-  editPost,
   itemPostSelector,
   itemPostThunk
 } from "src/components/ViewAllPosts/Posts.slice"
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
+import { dataMyPost, editPost, myPostSelector } from "../MyPost.slice"
+import Spinner from "react-bootstrap/Spinner"
 
 interface RouteParams {
   postId: string
 }
 const EditPost = () => {
   const dispatch = useAppDispatch()
+  const { isFetching } = useAppSelector(myPostSelector)
   const data = useAppSelector(itemPostSelector)
   const { dataPost } = data
 
@@ -55,7 +57,10 @@ const EditPost = () => {
       image: image,
       body: content
     }
+    console.log(params)
+
     dispatch(editPost(params))
+    dispatch(dataMyPost(1))
   }
 
   const handleChange = value => {
@@ -87,7 +92,7 @@ const EditPost = () => {
       <Form>
         <Form.Group className="mt-3">
           <Row>
-            <Col xs={8}>
+            <Col xs={11} md={8}>
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type="text"
@@ -106,7 +111,7 @@ const EditPost = () => {
             <Col xs={12} className="mb-3">
               <img src={image} alt="" className="image-post" />
             </Col>
-            <Col xs={12}>
+            <Col xs={11}>
               <Form.File
                 type="file"
                 name="image-upload"
@@ -117,7 +122,7 @@ const EditPost = () => {
         </Form.Group>
         <Form.Group className="mt-3">
           <Row>
-            <Col xs={10}>
+            <Col xs={11} md={10}>
               <Form.Label>Content</Form.Label>
               <ReactQuill
                 theme="snow"
@@ -140,6 +145,16 @@ const EditPost = () => {
                 type="button"
                 onClick={() => handleEditPost(postId, title, image, content)}
               >
+                {isFetching && (
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="false"
+                    className="mr-1"
+                  />
+                )}
                 Edit
               </Button>
             </Col>

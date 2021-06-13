@@ -102,7 +102,7 @@ img {
       align-items: center;
     }
   }
-  
+
 }
 
 @media (max-width: 768px) {
@@ -230,4 +230,9 @@ div#example-modal-sizes-title-lg {
   color: var(--widget-title-color);
   background-color: var(--post-card-bg);
   border-color: #dee2e6 #dee2e6 #fff;
+}
+
+a.page-link {
+  border: 1px solid var(--border-color);
+  background-color: var(--post-card-bg);
 }

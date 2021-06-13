@@ -23,8 +23,7 @@ const PostItem = ({ title, image, createdAt, body, postId }) => {
     try {
       const response = await PostsApi.deletePost(id)
       if (response.status === 200) {
-        console.log(response)
-        dispatch(dataMyPost())
+        dispatch(dataMyPost(1))
         setShow(false)
       }
     } catch (err) {
@@ -59,7 +58,7 @@ const PostItem = ({ title, image, createdAt, body, postId }) => {
           </Row>
 
           <Dropdown className="ml-3">
-            <Dropdown.Toggle as="div" id="dropdown-p">
+            <Dropdown.Toggle as="div" id="dropdown-icon">
               <i className="fas fa-ellipsis-h"></i>
             </Dropdown.Toggle>
             <Dropdown.Menu className="dropdown-user_menu p-0">

@@ -22,4 +22,7 @@ export const AddPostPage = styled.div`
   .form-control-file {
     color: var(--widget-title-color);
   }
+  .quill {
+    background-color: white;
+  }
 `

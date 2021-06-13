@@ -57,14 +57,11 @@ const Header = () => {
   }, [scrollHeader])
 
   useEffect(() => {
-    console.log(isSuccess)
-
     setToken(accessToken)
     if (token) {
       dispatch(currentUser())
     }
   }, [token])
-  // console.log(user)
 
   return (
     <HeaderBlogs className="header">

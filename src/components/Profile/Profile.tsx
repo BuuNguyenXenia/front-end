@@ -14,11 +14,12 @@ import * as Yup from "yup"
 import userApi from "src/apis/user.api"
 import { MSG } from "src/constants/showMsg"
 import avatarDefault from "src/assets/images/avatar.png"
+import Spinner from "react-bootstrap/Spinner"
 
 const Profile = () => {
   const user = useAppSelector(userSelector)
   const dispatch = useAppDispatch()
-  const { name, email, avatar } = user
+  const { name, email, avatar, isFetching } = user
 
   const [userName, setUserName] = useState<string>(name)
   const [checkEditUSer, setCheckEditUSer] = useState<boolean>(false)
@@ -37,7 +38,7 @@ const Profile = () => {
       urlUser: name
     }
     dispatch(updateUserName(params))
-    toast.success("Finish")
+    toast.success("Change User name successfully")
   }
 
   const schema = Yup.object().shape({
@@ -84,29 +85,35 @@ const Profile = () => {
   const handleShow = () => setShow(true)
 
   const imageUploadToImgur = async (image: any) => {
-    try {
-      const formData = new FormData()
+    if (image !== null) {
+      try {
+        const formData = new FormData()
 
-      formData.append("file", image)
-      formData.append("tags", `codeinfuse, medium, gist`)
-      formData.append("upload_preset", "rhy123")
-      formData.append("api_key", "954397545867351")
+        formData.append("file", image)
+        formData.append("tags", `codeinfuse, medium, gist`)
+        formData.append("upload_preset", "rhy123")
+        formData.append("api_key", "954397545867351")
 
-      const response = await userApi.uploadAvatar(formData)
-      const data = await response.data
+        const response = await userApi.uploadAvatar(formData)
+        const data = await response.data
 
-      if (response.status === 200) {
-        const params = {
-          name: name,
-          avatar: data.secure_url
+        if (response.status === 200) {
+          const params = {
+            name: name,
+            avatar: data.secure_url
+          }
+          dispatch(updateAvatarUser(params))
+          toast.success(MSG.UPDATE_AVATAR_SUCCESS)
+          setProfileImg(avatarDefault)
+          if (!isFetching) {
+            setShow(false)
+          }
         }
-        dispatch(updateAvatarUser(params))
-        toast.success(MSG.UPDATE_AVATAR_SUCCESS)
-        setProfileImg(avatarDefault)
-        setShow(false)
+      } catch (err) {
+        toast.error(err.response.data)
       }
-    } catch (err) {
-      toast.error(err.response.data)
+    } else {
+      toast.error("Please choose picture")
     }
   }
 
@@ -182,7 +189,19 @@ const Profile = () => {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => imageUploadToImgur(image)}>Save</Button>
+          <Button onClick={() => imageUploadToImgur(image)}>
+            {isFetching && (
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="false"
+                className="mr-1"
+              />
+            )}
+            Save
+          </Button>
         </Modal.Footer>
       </Modal>
       <Row className={checkEditUSer ? "m-0 mt-5 active" : "m-0 form-user"}>
