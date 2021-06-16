@@ -4,11 +4,12 @@ import LocalStorageService from "src/services/LocalStorageService/Storage.servic
 import { useAppDispatch, useAppSelector } from "src/store/hooks"
 import { getDataSearchPosts, searchPostsSelector } from "./Search.slice"
 import { SearchStyle } from "./SearchPage.slice"
+import Loading from "src/components/Loading/Loading"
 
 const SearchPage = () => {
   const dispatch = useAppDispatch()
   const dataSearch = useAppSelector(searchPostsSelector)
-  const { isSuccess, data } = dataSearch
+  const { isSuccess, data, isFetching } = dataSearch
   const keySearch: any = LocalStorageService.getItem<string>("keySearch")
   useEffect(() => {
     dispatch(getDataSearchPosts(keySearch))
@@ -23,6 +24,8 @@ const SearchPage = () => {
         data.posts.map((el, i) => (
           <LatestNewsItem {...el} key={"search-item-" + i} />
         ))
+      ) : isFetching ? (
+        <Loading height={50}/>
       ) : (
         <p className="found text-center my-5">No results found</p>
       )}

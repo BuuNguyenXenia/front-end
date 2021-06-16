@@ -1,24 +1,21 @@
-import React, { useState } from "react"
+import React from "react"
 import { Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { urlPostItem } from "src/common/Handle/handlePosts"
 import { itemPostThunk } from "src/components/ViewAllPosts/Posts.slice"
 import { handleShowContent } from "src/helpers/string"
 import { clearState } from "src/components/ViewAllPosts/Posts.slice"
 import { useAppDispatch } from "src/store/hooks"
 import { Item } from "./FeaturedItem.styles"
 import { formatDate } from "src/helpers/date"
-import LocalStorageService from "src/services/LocalStorageService/Storage.service"
+import { PATH } from "src/constants/path"
 
 const FeaturedItem = ({ title, createdAt, postId, image }) => {
-  const [urlPost] = useState<string>(urlPostItem(title))
   const dispatch = useAppDispatch()
 
   const content = handleShowContent(title, 59)
   const creatDate = formatDate(createdAt)
 
   const handleItemPost = (_id: string) => {
-    LocalStorageService.setItem("urlPost", title)
     dispatch(itemPostThunk(_id))
     dispatch(clearState())
   }
@@ -27,7 +24,7 @@ const FeaturedItem = ({ title, createdAt, postId, image }) => {
     <Col xl={4} lg={4} md={12} sm={12} className="featured-items mb-4">
       <Item>
         <Link
-          to={`${urlPost}/${postId}`}
+          to={`${PATH.ITEM_POST}/${postId}`}
           className="featured-item"
           onClick={() => handleItemPost(postId)}
         >

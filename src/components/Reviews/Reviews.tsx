@@ -7,12 +7,12 @@ import ReviewItem from "./ReviewItem/ReviewItem"
 import { getReviewsPosts, reviewsPostsSelector } from "./Reviews.slice"
 import { ReviewsList } from "./Reviews.styles"
 import ReviewTop from "./ReviewTop/ReviewTop"
+import Loading from "../Loading/Loading"
 
 export default function Reviews() {
   const dispatch = useAppDispatch()
   const reviewsPosts = useAppSelector(reviewsPostsSelector)
-  const { current, isSuccess } = reviewsPosts
-  console.log(reviewsPosts)
+  const { current, isSuccess, isFetching } = reviewsPosts
 
   useEffect(() => {
     dispatch(getReviewsPosts())
@@ -28,6 +28,7 @@ export default function Reviews() {
       <div className="view-list">
         <Row>
           <Col xl={6} lg={6} md={12} sm={12} className="mt-3">
+            {isFetching && <Loading height={321.63} />}
             {isSuccess
               ? current
                   .slice(1, 2)
@@ -37,6 +38,7 @@ export default function Reviews() {
               : null}
           </Col>
           <Col xl={6} lg={6} md={12} sm={12} className="mt-3">
+            {isFetching && <Loading height={321.63} />}
             {isSuccess
               ? current
                   .slice(2, 5)

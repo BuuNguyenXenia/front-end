@@ -27,18 +27,28 @@ const searchPostsSlice = createSlice({
   initialState: {
     data: {},
     isSuccess: false,
-    isError: false
+    isError: false,
+    isFetching: false
   },
   reducers: {},
   extraReducers: {
     [getDataSearchPosts.fulfilled.type]: (state, { payload }) => {
       state.data = payload
       state.isSuccess = true
+      state.isError = false
+      state.isFetching = false
       return state
     },
     [getDataSearchPosts.rejected.type]: state => {
-      state.isError = false
+      state.isSuccess = false
+      state.isError = true
+      state.isFetching = false
       return state
+    },
+    [getDataSearchPosts.pending.type]: state => {
+      state.isSuccess = false
+      state.isError = false
+      state.isFetching = true
     }
   }
 })

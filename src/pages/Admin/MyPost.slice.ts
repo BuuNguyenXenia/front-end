@@ -84,13 +84,22 @@ const myPostSlice = createSlice({
   extraReducers: {
     [dataMyPost.fulfilled.type]: (state, { payload }) => {
       state.dataPost = payload
+      state.isError = false
       state.isSuccess = true
+      state.isFetching = false
 
       return state
     },
     [dataMyPost.rejected.type]: state => {
+      state.isError = true
+      state.isSuccess = false
+      state.isFetching = false
+      return state
+    },
+    [dataMyPost.pending.type]: state => {
       state.isError = false
       state.isSuccess = false
+      state.isFetching = true
       return state
     },
     [createNewPost.fulfilled.type]: (state, { payload }) => {

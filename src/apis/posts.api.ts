@@ -56,6 +56,14 @@ const PostsApi = {
   updatePost: (postId, params) => {
     const url = `/posts/${postId}`
     return axiosClient.put(url, params)
+  },
+  getNotification: page => {
+    const url = `/notification?page=${page}&per_page=6`
+    return axiosClient.get(url)
+  },
+  checkViewedNotification: notificationId => {
+    const url = `/notification/${notificationId}`
+    return axiosClient.post(url)
   }
 }
 

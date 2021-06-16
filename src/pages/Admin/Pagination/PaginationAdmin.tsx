@@ -5,7 +5,6 @@ import { dataMyPost } from "../MyPost.slice"
 
 export default function PaginationAdmin({ lastPage }) {
   const dispatch = useAppDispatch()
-  console.log(lastPage)
 
   const [currPage, setCurrPage] = React.useState(1)
 

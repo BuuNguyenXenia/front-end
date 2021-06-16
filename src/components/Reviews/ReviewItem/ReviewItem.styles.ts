@@ -12,6 +12,13 @@ export const ItemReview = styled.div`
     border: 1px solid var(--border-color);
     background-color: var(--post-card-bg);
   }
+  .card-review-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
   .card-item {
     padding: 8px;
     margin: 0px;
@@ -38,7 +45,7 @@ export const ItemReview = styled.div`
   }
   .card-title {
     font-size: 15px;
-    display: block;
+    /* display: block; */
     font-weight: 700;
     line-height: 1.3em;
     a {

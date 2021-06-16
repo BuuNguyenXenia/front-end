@@ -11,6 +11,10 @@ export const LastsNewsItemPage = styled.div`
     display: flex;
     padding: 5px 15px;
   }
+  .lastsNews-image {
+    display: flex;
+    align-items: center;
+  }
   .lastsNews-item {
     padding: 10px;
   }
@@ -46,6 +50,12 @@ export const LastsNewsItemPage = styled.div`
     }
   }
   .card-lastsNews-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
     font-size: 0.875em;
     color: var(--text-color);
     margin: 8px 0px;

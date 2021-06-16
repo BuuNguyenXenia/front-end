@@ -1,8 +1,7 @@
 import { useEffect } from "react"
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap"
-import Switch from "react-bootstrap/esm/Switch"
 import { Toaster } from "react-hot-toast"
-import { Route } from "react-router"
+import { Route, Switch } from "react-router-dom"
 import { PATH } from "src/constants/path"
 import { useAppDispatch, useAppSelector } from "src/store/hooks"
 import { userSelector } from "../User/User.slice"
@@ -40,6 +39,7 @@ const ManagePost = () => {
                       </Route>
                       <Route
                         path={`${PATH.MANAGE_POST}${PATH.EDIT_POST}/:postId`}
+                        exact
                       >
                         <EditPost />
                       </Route>

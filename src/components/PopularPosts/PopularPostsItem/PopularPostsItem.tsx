@@ -1,24 +1,22 @@
-import React, { useState } from "react"
+import React from "react"
 import { Card, Col, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { urlPostItem } from "src/common/Handle/handlePosts"
 import {
   clearState,
   itemPostThunk
 } from "src/components/ViewAllPosts/Posts.slice"
+import { PATH } from "src/constants/path"
 import { formatDate } from "src/helpers/date"
-import LocalStorageService from "src/services/LocalStorageService/Storage.service"
+
 import { useAppDispatch } from "src/store/hooks"
 import { PostsItem } from "./PopularPostsItem.styles"
 
 export default function PopularPostsItem({ title, createdAt, postId, image }) {
-  const [urlPost] = useState<string>(urlPostItem(title))
   const dispatch = useAppDispatch()
 
   const creatDate = formatDate(createdAt)
 
   const handleItemPost = (_id: string) => {
-    LocalStorageService.setItem("urlPost", title)
     dispatch(itemPostThunk(_id))
     dispatch(clearState())
   }
@@ -28,7 +26,7 @@ export default function PopularPostsItem({ title, createdAt, postId, image }) {
         <Row>
           <Col xs={4} className="p-0">
             <Link
-              to={`${urlPost}/${postId}`}
+              to={`${PATH.ITEM_POST}/${postId}`}
               className="posts-item-image wrapper-image"
               onClick={() => handleItemPost(postId)}
             >
@@ -38,7 +36,7 @@ export default function PopularPostsItem({ title, createdAt, postId, image }) {
           <Col xs={8} className="posts-item-body">
             <h5 className="posts-item-title wrapper-title">
               <Link
-                to={`${urlPost}/${postId}`}
+                to={`${PATH.ITEM_POST}/${postId}`}
                 onClick={() => handleItemPost(postId)}
               >
                 {title}

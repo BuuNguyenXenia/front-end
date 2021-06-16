@@ -20,14 +20,25 @@ const popularPostsSlice = createSlice({
   name: "popularPosts",
   initialState: {
     current: {},
-    isSuccess: false
+    isSuccess: false,
+    isFetching: false
   },
   reducers: {},
   extraReducers: {
     [getPopularPosts.fulfilled.type]: (state, { payload }) => {
       state.isSuccess = true
+      state.isFetching = false
+
       state.current = payload.posts
       return state
+    },
+    [getPopularPosts.rejected.type]: (state, { payload }) => {
+      state.isSuccess = false
+      state.isFetching = false
+    },
+    [getPopularPosts.pending.type]: (state, { payload }) => {
+      state.isSuccess = false
+      state.isFetching = true
     }
   }
 })

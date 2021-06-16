@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Card, Col, Row } from "react-bootstrap"
 import { LastsNewsItemPage } from "./LatestNewsItem.styles"
 import { handleShowContent } from "src/helpers/string"
@@ -8,9 +8,9 @@ import {
   clearState,
   itemPostThunk
 } from "src/components/ViewAllPosts/Posts.slice"
-import { urlPostItem } from "src/common/Handle/handlePosts"
+
 import { formatDate } from "src/helpers/date"
-import LocalStorageService from "src/services/LocalStorageService/Storage.service"
+import { PATH } from "src/constants/path"
 
 export default function LatestNewsItem({
   title,
@@ -19,14 +19,11 @@ export default function LatestNewsItem({
   postId,
   image
 }) {
-  const [urlPost] = useState<string>(urlPostItem(title))
   const dispatch = useAppDispatch()
 
-  const content = handleShowContent(body, 100)
   const creatDate = formatDate(createdAt)
 
   const handleItemPost = (postId: string) => {
-    LocalStorageService.setItem("urlPost", title)
     dispatch(itemPostThunk(postId))
     dispatch(clearState())
   }
@@ -34,9 +31,9 @@ export default function LatestNewsItem({
     <LastsNewsItemPage>
       <Card className="card-lastsNews-item">
         <Row className="lastsNews-item">
-          <Col xl={4} lg={4} md={4} sm={4} className="px-2">
+          <Col xl={4} lg={4} md={4} sm={4} className="lastsNews-image px-2">
             <Link
-              to={`${urlPost}/${postId}`}
+              to={`${PATH.ITEM_POST}/${postId}`}
               className="card-lastsNews-image"
               onClick={() => handleItemPost(postId)}
             >
@@ -47,7 +44,7 @@ export default function LatestNewsItem({
             <Card.Body className="card-lastsNews-body">
               <Card.Title className="card-lastsNews-title mb-1">
                 <Link
-                  to={`${urlPost}/${postId}`}
+                  to={`${PATH.ITEM_POST}/${postId}`}
                   onClick={() => handleItemPost(postId)}
                 >
                   {title}
@@ -56,7 +53,7 @@ export default function LatestNewsItem({
               <Card.Text
                 as="div"
                 className="card-lastsNews-text"
-                dangerouslySetInnerHTML={{ __html: content }}
+                dangerouslySetInnerHTML={{ __html: body }}
               ></Card.Text>
               <span className="card-lastsNews-author">
                 by <span>Team DUT</span> • {creatDate}

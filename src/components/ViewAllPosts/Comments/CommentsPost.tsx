@@ -3,11 +3,11 @@ import toast, { Toaster } from "react-hot-toast"
 import { Button, Comment, Form } from "semantic-ui-react"
 import { MSG } from "src/constants/showMsg"
 import LocalStorageService from "src/services/LocalStorageService/Storage.service"
-import { useAppDispatch } from "src/store/hooks"
-import { createCommentPost } from "../Posts.slice"
+import { useAppDispatch, useAppSelector } from "src/store/hooks"
+import { addComment, createCommentPost } from "../Posts.slice"
 import CommentsItem from "./CommentsItem/CommentsItem"
 
-const CommentsPost = ({ postId, comments }) => {
+const CommentsPost = ({ postId, comments, avatar, email, name }) => {
   const [userComment, setUserComment] = useState<string>("")
   const dispatch = useAppDispatch()
 
@@ -15,14 +15,28 @@ const CommentsPost = ({ postId, comments }) => {
     setUserComment(e.target.value)
   }
 
+  console.log(comments)
   const HandleChangeComment = (postId: string, value: string) => {
     let accessToken = LocalStorageService.getItem("accessToken")
+    var date = new Date()
+    let data = {
+      post: postId,
+      body: value,
+      createdAt: date,
+      userInfo: {
+        avatar: avatar,
+        email: email,
+        name: name
+      }
+    }
     const params = {
       _id: postId,
       body: value
     }
+
     if (accessToken) {
       dispatch(createCommentPost(params))
+      dispatch(addComment(data))
       setUserComment("")
     } else {
       toast.error(MSG.NOT_LOGIN_ERROR)

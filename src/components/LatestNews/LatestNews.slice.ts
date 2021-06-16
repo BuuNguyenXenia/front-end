@@ -20,6 +20,7 @@ const latestNewsSlice = createSlice({
   initialState: {
     current: {},
     isSuccess: false,
+    isFetching: false,
     count: 0,
     lastPage: 0
   },
@@ -30,8 +31,17 @@ const latestNewsSlice = createSlice({
       state.count = payload.count
       state.lastPage = payload.last_page
       state.isSuccess = true
+      state.isFetching = false
 
       return state
+    },
+    [getLatestNews.rejected.type]: (state, { payload }) => {
+      state.isFetching = false
+      state.isSuccess = false
+    },
+    [getLatestNews.pending.type]: (state, { payload }) => {
+      state.isFetching = true
+      state.isSuccess = false
     }
   }
 })

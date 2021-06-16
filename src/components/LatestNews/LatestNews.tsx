@@ -7,11 +7,12 @@ import { getLatestNews, latestNewsPostsSelector } from "./LatestNews.slice"
 import { LatestNewsPage } from "./LatestNews.styles"
 import LatestNewsItem from "./LatestNewsItem/LatestNewsItem"
 import PaginationPost from "../Pagination/PaginationPost"
+import Loading from "../Loading/Loading"
 
 export default function LatestNews() {
   const dispatch = useAppDispatch()
   const latestNewsPosts = useAppSelector(latestNewsPostsSelector)
-  const { current, isSuccess, lastPage } = latestNewsPosts
+  const { current, isSuccess, isFetching, lastPage } = latestNewsPosts
 
   useEffect(() => {
     dispatch(getLatestNews(1))
@@ -28,6 +29,7 @@ export default function LatestNews() {
       <div className="view-list">
         <Row className="mt-2">
           <Col sm={12} xs={12}>
+            {isFetching && <Loading height={1149.36} />}
             {isSuccess
               ? current.map((el, i) => (
                   <LatestNewsItem {...el} key={"latest-new-item" + i} />

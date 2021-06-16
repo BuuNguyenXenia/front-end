@@ -19,14 +19,22 @@ const featuredSlice = createSlice({
   name: "featuredPosts",
   initialState: {
     current: {},
-    isSuccess: false
+    isSuccess: false,
+    isFetching: false
   },
   reducers: {},
   extraReducers: {
     [getFeaturedPosts.fulfilled.type]: (state, { payload }) => {
       state.isSuccess = true
+      state.isFetching = false
       state.current = payload.posts
       return state
+    },
+    [getFeaturedPosts.rejected.type]: (state, { payload }) => {
+      state.isFetching = false
+    },
+    [getFeaturedPosts.pending.type]: (state, { payload }) => {
+      state.isFetching = true
     }
   }
 })

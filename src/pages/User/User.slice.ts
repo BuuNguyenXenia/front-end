@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import userApi from "src/apis/user.api"
+import { clearToken, setToken } from "src/helpers/isAuthen"
 import LocalStorageService from "src/services/LocalStorageService/Storage.service"
 
 export const loginUser = createAsyncThunk(
@@ -28,8 +29,7 @@ export const logoutUser = createAsyncThunk("user/logout", async thunkAPI => {
   try {
     const response = await userApi.logOut()
     if (response.status === 200) {
-      LocalStorageService.removeItem("accessToken")
-      LocalStorageService.removeItem("refreshToken")
+      clearToken()
       return response.data
     }
   } catch (error) {
@@ -65,6 +65,8 @@ export const currentUser = createAsyncThunk("user/current", async thunkAPI => {
     const response = await userApi.currentUser()
 
     if (response.status === 200) {
+      setToken(response.data.role)
+
       return response.data
     }
   } catch (e) {

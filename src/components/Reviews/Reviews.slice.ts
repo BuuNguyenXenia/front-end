@@ -19,14 +19,25 @@ const reviewsSlice = createSlice({
   name: "reviewPosts",
   initialState: {
     current: {},
-    isSuccess: false
+    isSuccess: false,
+    isFetching: false
   },
   reducers: {},
   extraReducers: {
     [getReviewsPosts.fulfilled.type]: (state, { payload }) => {
       state.isSuccess = true
+      state.isFetching = false
       state.current = payload.posts
       return state
+    },
+    [getReviewsPosts.rejected.type]: (state, { payload }) => {
+      state.isSuccess = false
+      state.isFetching = false
+      
+    },
+    [getReviewsPosts.pending.type]: (state, { payload }) => {
+      state.isSuccess = false
+      state.isFetching = true
     }
   }
 })

@@ -13,6 +13,7 @@ import {
 import { PATH } from "src/constants/path"
 import LocalStorageService from "src/services/LocalStorageService/Storage.service"
 import { clearState } from "../ViewAllPosts/Posts.slice"
+import Notification from "../Notification/Notification"
 
 const Header = () => {
   const [toogle, setToggle] = useState<boolean>(false)
@@ -79,6 +80,7 @@ const Header = () => {
                   onClick={nightMode}
                 ></span>
               </ThemeSwitch>
+              {role === "admin" && <Notification />}
               {isSuccess ? (
                 <Dropdown className="ml-3">
                   <Dropdown.Toggle as="div" id="dropdown-user">
@@ -107,10 +109,6 @@ const Header = () => {
                             Settings
                           </Dropdown.Item>
                         </Link>
-                        <Dropdown.Item href="" className="link link-plain">
-                          <i className="fas fa-bell"></i>
-                          Notification
-                        </Dropdown.Item>
                       </>
                     ) : (
                       <>

@@ -1,5 +1,14 @@
 import React from "react"
+import { Col } from "react-bootstrap"
+import Spinner from "react-bootstrap/Spinner"
 
-export default function Loading() {
-  return <div>loading...</div>
+export default function Loading({ height }) {
+  const styled = {
+    height: `${height}px`
+  }
+  return (
+    <Col xs={12} className="p-0" style={styled}>
+      <Spinner animation="border" variant="info" size="sm" />
+    </Col>
+  )
 }

@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 export const SearchStyle = styled.div`
+  min-height: 100vh;
   .query-info {
     position: relative;
     float: left;

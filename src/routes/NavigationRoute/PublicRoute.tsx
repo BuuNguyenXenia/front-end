@@ -1,15 +1,16 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import { PATH } from "src/constants/path"
-import LocalStorageService from "src/services/LocalStorageService/Storage.service"
+import { authenticated } from "src/helpers/isAuthen"
 
 const PublicRoute = ({ component: Component, restricted, ...rest }: any) => {
-  const accessToken = LocalStorageService.getItem("accessToken")
+  const isLogin: any = authenticated()
+
   return (
     <Route
       {...rest}
       render={props =>
-        accessToken && restricted ? (
+        isLogin && restricted ? (
           <Redirect to={PATH.HOME} />
         ) : (
           <Component {...props} />

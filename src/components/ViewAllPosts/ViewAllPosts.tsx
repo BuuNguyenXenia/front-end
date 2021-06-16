@@ -9,12 +9,12 @@ import {
 import { LatestNewsPage } from "../LatestNews/LatestNews.styles"
 import LatestNewsItem from "../LatestNews/LatestNewsItem/LatestNewsItem"
 import PaginationPost from "../Pagination/PaginationPost"
+import Loading from "../Loading/Loading"
 
 const ViewAllPosts = () => {
   const dispatch = useAppDispatch()
   const latestNewsPosts = useAppSelector(latestNewsPostsSelector)
-  const { current, isSuccess, lastPage } = latestNewsPosts
-
+  const { current, isSuccess, isFetching, lastPage } = latestNewsPosts
   useEffect(() => {
     dispatch(getLatestNews(1))
   }, [])
@@ -30,6 +30,7 @@ const ViewAllPosts = () => {
       <div className="view-list">
         <Row className="mt-2">
           <Col sm={12} xs={12}>
+            {isFetching && <Loading height={20} />}
             {isSuccess
               ? current.map((el, i) => (
                   <LatestNewsItem {...el} key={"latest-new-item" + i} />

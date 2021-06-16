@@ -8,10 +8,12 @@ import reviewsReducer from "src/components/Reviews/Reviews.slice"
 import searchReducer from "src/pages/SearchPage/Search.slice"
 import itemPostReducer from "src/components/ViewAllPosts/Posts.slice"
 import myPostReducer from "src/pages/Admin/MyPost.slice"
+import notificationReducer from "src/components/Notification/Notification.slice"
 const rootReducer = {
   user: userReducer,
-  popularPosts: popularPostsReducer,
+  notificationPost: notificationReducer,
   latestDealsPosts: latestDealsReducer,
+  popularPosts: popularPostsReducer,
   latestNewsPosts: lastNewsReducer,
   featuredPosts: featuredReducer,
   reviewsPosts: reviewsReducer,

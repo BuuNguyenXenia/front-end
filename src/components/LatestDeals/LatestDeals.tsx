@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Card, Row } from "react-bootstrap"
+import { Card, Col, Row } from "react-bootstrap"
 import { Deals } from "./LatestDeals.styles"
 import LatestDealsItem from "./LatestDealsItem/LatestDealsItem"
 import "../../common/scss/Card.styles.scss"
@@ -8,11 +8,12 @@ import {
   getLatestDealsPosts,
   latestDealsPostsSelector
 } from "./LatestDeals.slice"
+import Loading from "../Loading/Loading"
 
 const LatestDeals = () => {
   const dispatch = useAppDispatch()
   const latestDealsPosts = useAppSelector(latestDealsPostsSelector)
-  const { current, isSuccess } = latestDealsPosts
+  const { current, isSuccess, isFetching } = latestDealsPosts
 
   useEffect(() => {
     dispatch(getLatestDealsPosts())
@@ -26,6 +27,11 @@ const LatestDeals = () => {
         <Card.Body className="deals-card-body">
           <Card.Text as="div">
             <Row>
+              {isFetching && (
+                <Col xs={12}>
+                  <Loading height={371.062} />
+                </Col>
+              )}
               {isSuccess
                 ? current.map((el, i) => (
                     <LatestDealsItem {...el} key={"latest-deals-item" + i} />

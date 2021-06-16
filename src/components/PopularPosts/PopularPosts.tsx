@@ -4,12 +4,15 @@ import { useAppDispatch, useAppSelector } from "src/store/hooks"
 import { getPopularPosts, popularPostsSelector } from "./PopularPost.slice"
 import { Posts } from "./PopularPosts.styles"
 import PopularPostsItem from "./PopularPostsItem/PopularPostsItem"
+import Loading from "../Loading/Loading"
 
 const PopularPosts = () => {
   const dispatch = useAppDispatch()
   const popularPosts = useAppSelector(popularPostsSelector)
 
-  const { isSuccess, current } = popularPosts
+  const { isSuccess, current, isFetching } = popularPosts
+  // console.log(isSuccess)
+
   useEffect(() => {
     dispatch(getPopularPosts())
   }, [])
@@ -20,6 +23,7 @@ const PopularPosts = () => {
           Popular Posts
         </Card.Header>
         <Card.Body className="posts-card-body">
+          {isFetching && <Loading height={267} />}
           {isSuccess
             ? current.map((el, i) => (
                 <PopularPostsItem {...el} key={"poppular-post-item" + i} />
