@@ -50,11 +50,9 @@ export default function LatestNewsItem({
                   {title}
                 </Link>
               </Card.Title>
-              <Card.Text
-                as="div"
-                className="card-lastsNews-text"
-                dangerouslySetInnerHTML={{ __html: body }}
-              ></Card.Text>
+              <Card.Text as="div" className="card-lastsNews-text">
+                <p dangerouslySetInnerHTML={{ __html: body }}></p>
+              </Card.Text>
               <span className="card-lastsNews-author">
                 by <span>Team DUT</span> • {creatDate}
               </span>
