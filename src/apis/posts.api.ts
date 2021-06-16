@@ -64,6 +64,10 @@ const PostsApi = {
   checkViewedNotification: notificationId => {
     const url = `/notification/${notificationId}`
     return axiosClient.post(url)
+  },
+  getCommentsPost: postId => {
+    const url = `/comments/${postId}`
+    return axiosClient.get(url)
   }
 }
 

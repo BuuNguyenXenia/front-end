@@ -1,9 +1,8 @@
 import React from "react"
 import { Redirect, Route } from "react-router-dom"
-import Layouts from "src/components/Layouts/Layouts"
-import { PATH } from "src/constants/path"
-import { authenticated } from "src/helpers/isAuthen"
-import LocalStorageService from "src/services/LocalStorageService/Storage.service"
+import Layouts from "src/container/components/Layouts/Layouts"
+import { PATH } from "src/services/constants/path"
+import { authenticated } from "src/services/helpers/isAuthen"
 
 const PrivateRoute = ({ component, ...rest }: any) => {
   const isLogin = authenticated()
