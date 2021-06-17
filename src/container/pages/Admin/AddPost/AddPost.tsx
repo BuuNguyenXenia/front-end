@@ -35,10 +35,19 @@ export const AddPost = () => {
   }
 
   const handleAddPost = (title: string, image: string, content: string) => {
-    const params = {
-      title: title,
-      image: image,
-      body: content
+    let params: any = {}
+    if (image.length > 0) {
+      params = {
+        title: title,
+        image: image,
+        body: content
+      }
+    } else {
+      params = {
+        title: title,
+
+        body: content
+      }
     }
     console.log(params)
 
