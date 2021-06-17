@@ -26,7 +26,7 @@ const PostsApi = {
     return axiosClient.get(url)
   },
   getFeatured: () => {
-    const url = "/posts?per_page=3&sort_by=+comment"
+    const url = "/posts?per_page=3&sort_by=-comment"
     return axiosClient.get(url)
   },
   getReviews: () => {
