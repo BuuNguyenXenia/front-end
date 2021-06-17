@@ -18,6 +18,7 @@ export const ProfileStyle = styled.div`
     }
   }
   .profile-avatar {
+    position: relative;
     img {
       width: 100px;
       height: 100px;
@@ -56,7 +57,7 @@ export const ProfileStyle = styled.div`
   }
   .change-avatar {
     position: absolute;
-    right: 8px;
+    right: 0px;
     bottom: 0px;
     background-color: white;
     width: 35px;
