@@ -1,9 +1,7 @@
 import styled from "styled-components"
 
 export const ItemReview = styled.div`
-  :nth-child(2) {
-    margin: 16px 0px;
-  }
+  min-height: calc(100% / 3 - 24px);
   .card-review-item {
     display: flex;
     align-items: center;
@@ -56,4 +54,5 @@ export const ItemReview = styled.div`
       }
     }
   }
+
 `

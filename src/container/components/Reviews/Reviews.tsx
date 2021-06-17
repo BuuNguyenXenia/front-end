@@ -42,7 +42,7 @@ export default function Reviews() {
                   ))
               : null}
           </Col>
-          <Col xl={6} lg={6} md={12} sm={12} className="mt-3">
+          <Col xl={6} lg={6} md={12} sm={12} className="mt-3 reviews-item">
             {isFetching && <Loading height={321.63} />}
             {isSuccess
               ? current

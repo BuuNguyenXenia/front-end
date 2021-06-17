@@ -30,4 +30,17 @@ export const ReviewsList = styled.div`
       color: var(--main-color);
     }
   }
+  .reviews-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 992px) {
+    .card-review-item-page {
+      :nth-child(2) {
+        margin: 16px 0px;
+      }
+    }
+  }
 `

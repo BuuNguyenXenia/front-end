@@ -21,7 +21,7 @@ export default function ReviewItem(props) {
     dispatch(getCommentsPostItem(postId))
   }
   return (
-    <ItemReview>
+    <ItemReview className="card-review-item-page">
       <Card className="card-review-item">
         <Row className="card-item">
           <Col sm={4} className="p-0">
