@@ -12,6 +12,9 @@ export const NotificationPage = styled.div`
       color: var(--black);
     }
   }
+  .dropdown-divider {
+    border-top: 1px solid var(--border-color);
+  }
   .dropdown-item {
     display: flex;
     justify-content: center;
@@ -24,6 +27,9 @@ export const NotificationPage = styled.div`
       height: 50px;
       border-radius: 50%;
       margin-right: 10px;
+    }
+    :hover {
+      background-color: var(--hover-notification);
     }
   }
 
