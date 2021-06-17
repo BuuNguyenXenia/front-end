@@ -42,13 +42,13 @@ const Notification = () => {
 
   const handleSeeAll = async () => {
     try {
+      dispatch(seeAll())
       const response = await PostsApi.seeAllNotification()
       if (response.status === 200) {
-        dispatch(seeAll())
+        console.log("success")
       }
     } catch (err) {
-      console.log(err)
-
+      console.log("error")
       throw err
     }
   }
@@ -65,7 +65,7 @@ const Notification = () => {
     var channel = pusher.subscribe(email)
     channel.bind("my-event", function (data: any) {
       console.log(JSON.stringify(data))
-      dispatch(addNotification(data))
+      dispatch(getNotificationPost(1))
     })
   }, [email])
 

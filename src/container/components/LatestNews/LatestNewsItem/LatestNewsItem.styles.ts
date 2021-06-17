@@ -36,8 +36,13 @@ export const LastsNewsItemPage = styled.div`
     }
   }
   .card-lastsNews-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
     font-size: 1.2em;
-    display: block;
     color: var(--post-title-color);
     font-weight: 700;
     line-height: 1.3em;
