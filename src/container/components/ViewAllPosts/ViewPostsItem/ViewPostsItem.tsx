@@ -21,6 +21,7 @@ const ViewPostsItem = () => {
   const dispatch = useAppDispatch()
   const dataItemPost = useAppSelector(itemPostSelector)
   const { dataPost, isSuccess, isFetching, isError, comments } = dataItemPost
+  console.log(dataPost)
 
   const { postId } = useParams<RouteParams>()
   const user = useAppSelector(userSelector)
