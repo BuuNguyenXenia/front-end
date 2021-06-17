@@ -19,8 +19,9 @@ import Spinner from "react-bootstrap/Spinner"
 const Profile = () => {
   const user = useAppSelector(userSelector)
   const dispatch = useAppDispatch()
-  const { name, email, avatar, isFetching } = user
+  const { name, email, avatar } = user
 
+  const [isFetchingImage, setIsFetchingImage] = useState<boolean>(false)
   const [userName, setUserName] = useState<string>(name)
   const [checkEditUSer, setCheckEditUSer] = useState<boolean>(false)
 
@@ -81,11 +82,13 @@ const Profile = () => {
 
   const handleClose = () => {
     setShow(false)
+    setIsFetchingImage(false)
   }
   const handleShow = () => setShow(true)
 
   const imageUploadToImgur = async (image: any) => {
     if (image !== null) {
+      setIsFetchingImage(true)
       try {
         const formData = new FormData()
 
@@ -105,8 +108,8 @@ const Profile = () => {
           dispatch(updateAvatarUser(params))
           toast.success(MSG.UPDATE_AVATAR_SUCCESS)
           setProfileImg(avatarDefault)
-          if (!isFetching) {
-            setShow(false)
+          if (!isFetchingImage) {
+            handleClose()
           }
         }
       } catch (err) {
@@ -190,7 +193,7 @@ const Profile = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => imageUploadToImgur(image)}>
-            {isFetching && (
+            {isFetchingImage && (
               <Spinner
                 as="span"
                 animation="border"
