@@ -5,7 +5,8 @@ import {
   addNotification,
   getNotificationPost,
   loadMoreNotification,
-  notificationPostSelector
+  notificationPostSelector,
+  seeAll
 } from "../../../redux/slices/notificationSlice/Notification.slice"
 import { NotificationPage } from "./Notification.styles"
 import NotificationItem from "./NotificationItem/NotificationItem"
@@ -16,7 +17,7 @@ import PostsApi from "src/apis/posts.api"
 const Notification = () => {
   const dispatch = useAppDispatch()
   const notificationPost = useAppSelector(notificationPostSelector)
-  const { dataNotification, isSuccess, lastPage } = notificationPost
+  const { dataNotification, isSuccess, lastPage, unsold } = notificationPost
 
   const user = useAppSelector(userSelector)
   const { email } = user
@@ -39,15 +40,22 @@ const Notification = () => {
     }
   }
 
-  useEffect(() => {
-    let tempt = 0
-    dataNotification.forEach(el => {
-      if (el.viewed === false) {
-        tempt++
+  const handleSeeAll = async () => {
+    try {
+      const response = await PostsApi.seeAllNotification()
+      if (response.status === 200) {
+        dispatch(seeAll())
       }
-    })
-    setCountNoti(tempt)
-  }, [dataNotification])
+    } catch (err) {
+      console.log(err)
+
+      throw err
+    }
+  }
+
+  useEffect(() => {
+    setCountNoti(unsold)
+  }, [unsold])
 
   useEffect(() => {
     var pusher = new Pusher("5ee23d2be54abf269991", {
@@ -62,7 +70,9 @@ const Notification = () => {
   }, [email])
 
   useEffect(() => {
-    dispatch(getNotificationPost(1))
+    if (Object.keys(dataNotification).length === 0) {
+      dispatch(getNotificationPost(1))
+    }
   }, [])
 
   return (
@@ -77,6 +87,10 @@ const Notification = () => {
           <i className="far fa-bell"></i>
         </Dropdown.Toggle>
         <Dropdown.Menu>
+          <div className="see-all" onClick={handleSeeAll}>
+            See All
+          </div>
+          <Dropdown.Divider />
           {isSuccess &&
             dataNotification.map((el, index) => (
               <NotificationItem {...el} key={"notification-item- " + index} />

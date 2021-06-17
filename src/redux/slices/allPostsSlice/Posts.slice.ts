@@ -160,16 +160,14 @@ const postsSlice = createSlice({
       state.isSuccess = false
       state.isError = false
       state.isFetching = true
-    },
-    [createCommentPost.fulfilled.type]: (state, { payload }) => {
-      console.log(payload)
-
-      state.comments = payload
-      return state
-    },
-    [createCommentPost.rejected.type]: state => {
-      return state
     }
+    // [createCommentPost.fulfilled.type]: (state, { payload }) => {
+    //   state.comments = payload
+    //   return state
+    // },
+    // [createCommentPost.rejected.type]: state => {
+    //   return state
+    // }
   }
 })
 

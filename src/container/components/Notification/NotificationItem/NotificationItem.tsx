@@ -9,7 +9,10 @@ import { PATH } from "src/services/constants/path"
 import PostsApi from "src/apis/posts.api"
 import { useAppDispatch } from "src/redux/store/hooks"
 import { checkViewed } from "../../../../redux/slices/notificationSlice/Notification.slice"
-import { itemPostThunk } from "src/redux/slices/allPostsSlice/Posts.slice"
+import {
+  getCommentsPostItem,
+  itemPostThunk
+} from "src/redux/slices/allPostsSlice/Posts.slice"
 
 const NotificationItem = ({
   message,
@@ -29,6 +32,7 @@ const NotificationItem = ({
   const handleChangeViewed = (postId: string, notificationId: string) => {
     history.push(`${PATH.ITEM_POST}/${postId}`)
     dispatch(itemPostThunk(postId))
+    dispatch(getCommentsPostItem(postId))
     if (!viewed) {
       PostsApi.checkViewedNotification(notificationId)
       dispatch(checkViewed(notificationId))

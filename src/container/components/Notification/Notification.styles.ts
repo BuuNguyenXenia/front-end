@@ -87,4 +87,18 @@ export const NotificationPage = styled.div`
     overflow-x: hidden;
     background-color: var(--post-card-bg);
   }
+  .see-all {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px 10px 10px;
+    font-weight: 600;
+    color: var(--main-color);
+    :hover {
+      text-decoration: underline;
+    }
+  }
+  .dropdown-divider {
+    margin: 0;
+  }
 `

@@ -19,6 +19,7 @@ const notificationSlice = createSlice({
   name: "notificationPost",
   initialState: {
     dataNotification: [],
+    unsold: 0,
     lastPage: 0,
     isSuccess: false,
     isError: false,
@@ -27,6 +28,7 @@ const notificationSlice = createSlice({
   reducers: {
     addNotification: (state: any, action) => {
       state.dataNotification = [action.payload, ...state.dataNotification]
+      state.unsold++
       return state
     },
     loadMoreNotification: (state: any, action) => {
@@ -39,7 +41,17 @@ const notificationSlice = createSlice({
       )
       if (state.dataNotification[index].viewed === false) {
         state.dataNotification[index].viewed = true
+        state.unsold--
       }
+      return state
+    },
+    seeAll: (state: any) => {
+      state.unsold = 0
+      state.dataNotification.forEach((el, index) => {
+        if (!el.viewed) {
+          state.dataNotification[index].viewed = true
+        }
+      })
       return state
     }
   },
@@ -47,6 +59,7 @@ const notificationSlice = createSlice({
     [getNotificationPost.fulfilled.type]: (state, { payload }) => {
       state.dataNotification = payload.notifications
       state.lastPage = payload.last_page
+      state.unsold = payload.unsold
 
       state.isSuccess = true
       state.isError = false
@@ -68,7 +81,7 @@ const notificationSlice = createSlice({
 
 const { reducer: notificationReducer } = notificationSlice
 
-export const { checkViewed, addNotification, loadMoreNotification } =
+export const { checkViewed, addNotification, loadMoreNotification, seeAll } =
   notificationSlice.actions
 export default notificationReducer
 

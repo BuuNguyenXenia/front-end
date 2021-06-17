@@ -22,11 +22,11 @@ const CommentsPost = props => {
 
   const HandleChangeComment = (postId: string, value: string) => {
     let accessToken = LocalStorageService.getItem("accessToken")
-    const dateB = JSON.parse(JSON.stringify({ date: new Date() }))
+    const createAt = JSON.parse(JSON.stringify({ date: new Date() }))
     let data = {
       post: postId,
       body: value,
-      createdAt: dateB.date,
+      createdAt: createAt.date,
       user: {
         avatar: avatar,
         email: email,
