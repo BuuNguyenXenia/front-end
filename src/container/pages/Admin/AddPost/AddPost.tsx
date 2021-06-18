@@ -19,7 +19,7 @@ export const AddPost = () => {
   const [image, setImage] = useState<string>("")
   const [content, setContent] = useState("")
 
-  const { isFetching } = useAppSelector(postsManageSelector)
+  const { isFetching, isSuccess } = useAppSelector(postsManageSelector)
 
   const handleChangeTitle = e => {
     setTitle(e.target.value)
@@ -35,22 +35,11 @@ export const AddPost = () => {
   }
 
   const handleAddPost = (title: string, image: string, content: string) => {
-    let params: any = {}
-    if (image.length > 0) {
-      params = {
-        title: title,
-        image: image,
-        body: content
-      }
-    } else {
-      params = {
-        title: title,
-
-        body: content
-      }
+    let params = {
+      title: title,
+      image: image,
+      body: content
     }
-    console.log(params)
-
     dispatch(createNewPost(params))
     dispatch(dataMyPost(1))
   }

@@ -13,6 +13,7 @@ import {
   getCommentsPostItem,
   itemPostThunk
 } from "src/redux/slices/allPostsSlice/Posts.slice"
+import Spinner from "react-bootstrap/Spinner"
 
 const PostItem = props => {
   const { title, image, createdAt, body, postId } = props
@@ -20,16 +21,21 @@ const PostItem = props => {
   const creatDate = formatDate(createdAt)
   const dispatch = useAppDispatch()
 
+  const [isFetchingImage, setIsFetchingImage] = useState<boolean>(false)
   const [show, setShow] = useState<boolean>(false)
-  const handleClose = () => setShow(false)
+  const handleClose = () => {
+    setShow(false)
+    setIsFetchingImage(false)
+  }
   const handleShow = () => setShow(true)
 
   const handleDeletePost = async (id: string) => {
     try {
+      setIsFetchingImage(true)
       const response = await PostsApi.deletePost(id)
       if (response.status === 200) {
         dispatch(deletePostAdmin(id))
-        setShow(false)
+        handleClose()
       }
     } catch (err) {
       console.log(err)
@@ -114,6 +120,16 @@ const PostItem = props => {
             Close
           </Button>
           <Button variant="primary" onClick={() => handleDeletePost(postId)}>
+            {isFetchingImage && (
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="false"
+                className="mr-1"
+              />
+            )}
             Delete
           </Button>
         </Modal.Footer>
