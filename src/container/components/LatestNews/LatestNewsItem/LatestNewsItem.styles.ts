@@ -19,9 +19,12 @@ export const LastsNewsItemPage = styled.div`
     padding: 10px;
   }
   .card-lastsNews-image {
+    height: 130px;
+    width: 100%;
     display: block;
     border-radius: 12px;
     img {
+      height: 100%;
       width: 100%;
       border-radius: var(--radius);
     }
@@ -73,6 +76,40 @@ export const LastsNewsItemPage = styled.div`
     color: var(--meta-color);
     span {
       color: var(--main-color);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .card-lastsNews-image {
+      height: 110px;
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: var(--radius);
+      }
+      :hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    .card-lastsNews-image {
+      height: 200px;
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: var(--radius);
+      }
+      :hover {
+        opacity: 0.8;
+      }
     }
   }
 `

@@ -81,7 +81,7 @@ export const AddPost = () => {
       <Form>
         <Form.Group className="mt-3">
           <Row>
-            <Col xs={11} md={8}>
+            <Col xs={12} md={8}>
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type="text"
@@ -108,7 +108,7 @@ export const AddPost = () => {
         </Form.Group>
         <Form.Group className="mt-3">
           <Row>
-            <Col xs={11} md={10}>
+            <Col xs={12} md={10}>
               <Form.Label>Content</Form.Label>
               <ReactQuill
                 theme="snow"

@@ -22,11 +22,16 @@ export const NotificationPage = styled.div`
     white-space: inherit;
     padding: 10px 20px 10px 10px;
     color: var(--post-title-color);
+    .notification-image {
+      /* width: 50px; */
+      height: 50px;
+      margin-right: 10px;
+    }
     .image {
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      margin-right: 10px;
+      
     }
     :hover {
       background-color: var(--hover-notification);

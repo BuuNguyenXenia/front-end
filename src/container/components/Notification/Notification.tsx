@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import { Dropdown } from "react-bootstrap"
 import { useAppDispatch, useAppSelector } from "src/redux/store/hooks"
 import {
-  addNotification,
   getNotificationPost,
   loadMoreNotification,
   notificationPostSelector,
@@ -13,11 +12,13 @@ import NotificationItem from "./NotificationItem/NotificationItem"
 import { userSelector } from "src/redux/slices/userSlice/User.slice"
 import Pusher from "pusher-js"
 import PostsApi from "src/apis/posts.api"
+import Loading from "../Loading/Loading"
 
 const Notification = () => {
   const dispatch = useAppDispatch()
   const notificationPost = useAppSelector(notificationPostSelector)
-  const { dataNotification, isSuccess, lastPage, unsold } = notificationPost
+  const { dataNotification, isSuccess, lastPage, unsold, isFetching } =
+    notificationPost
 
   const user = useAppSelector(userSelector)
   const { email } = user
@@ -91,6 +92,7 @@ const Notification = () => {
             See All
           </div>
           <Dropdown.Divider />
+          {isFetching && <Loading height={500} />}
           {isSuccess &&
             dataNotification.map((el, index) => (
               <NotificationItem {...el} key={"notification-item- " + index} />
